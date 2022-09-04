@@ -4,20 +4,20 @@ namespace EventRequestApi.Models
 {
     public class EventDto
     {
-        public string Name { get; set; } = null!;
-        public string Sku { get; set; } = null!;
-        public decimal Price { get; set; }
+        public string? Name { get; set; } 
+        public string? Sku { get; set; } 
+        public decimal? Price { get; set; }
 
-        public virtual BillingAndShippingAddressDto BillTo { get; set; } = null!;
-        public virtual BillingAndShippingAddressDto ShipTo { get; set; } = null!;
+        public BillingAndShippingAddressDto? BillTo { get; set; }
+        public BillingAndShippingAddressDto? ShipTo { get; set; }
     }
 
     public class BillingAndShippingAddressDto
     {
-        public string Name { get; set; } = null!;
-        public string Address { get; set; } = null!;
-        public string City { get; set; } = null!;
-        public string State { get; set; } = null!;
-        public string Zip { get; set; } = null!;
+        public string? Name { get; set; } 
+        public string? Address { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? Zip { get; set; }
     }
 }

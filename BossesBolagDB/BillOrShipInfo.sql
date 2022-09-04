@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[BillingAndShippingAddresses]
+﻿CREATE TABLE [dbo].[BillOrShipInfo]
 (
 	[Id] INT NOT NULL identity PRIMARY KEY, 
     [Name] NVARCHAR(100) NOT NULL, 

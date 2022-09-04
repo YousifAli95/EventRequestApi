@@ -58,7 +58,7 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="BillingAndShippingAddresses.sql" />
+    <Build Include="BillOrShipInfo.sql" />
     <Build Include="Events.sql" />
   </ItemGroup>
 </Project>

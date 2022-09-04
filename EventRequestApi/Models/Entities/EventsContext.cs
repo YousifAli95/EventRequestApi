@@ -16,13 +16,15 @@ namespace EventRequestApi.Models.Entities
         {
         }
 
-        public virtual DbSet<BillingAndShippingAddress> BillingAndShippingAddresses { get; set; } = null!;
+        public virtual DbSet<BillOrShipInfo> BillOrShipInfos { get; set; } = null!;
         public virtual DbSet<Event> Events { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BillingAndShippingAddress>(entity =>
+            modelBuilder.Entity<BillOrShipInfo>(entity =>
             {
+                entity.ToTable("BillOrShipInfo");
+
                 entity.Property(e => e.Address).HasMaxLength(100);
 
                 entity.Property(e => e.City).HasMaxLength(100);

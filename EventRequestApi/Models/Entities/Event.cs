@@ -12,7 +12,7 @@ namespace EventRequestApi.Models.Entities
         public int BillToId { get; set; }
         public int ShipToId { get; set; }
 
-        public virtual BillingAndShippingAddress BillTo { get; set; } = null!;
-        public virtual BillingAndShippingAddress ShipTo { get; set; } = null!;
+        public virtual BillOrShipInfo BillTo { get; set; } = null!;
+        public virtual BillOrShipInfo ShipTo { get; set; } = null!;
     }
 }
