@@ -23,11 +23,11 @@ namespace EventRequestApi.Controllers
 
 
         [HttpPost("/add-event")]
-        public HttpResponseMessage Post([FromBody] EventDto eventDTO )
+        public HttpResponseMessage Post([FromBody] Event @event )
         {
             try
             {
-                eventsService.AddEvent(eventDTO);
+                eventsService.AddEvent(@event);
                 return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
             }
             catch(Exception e)

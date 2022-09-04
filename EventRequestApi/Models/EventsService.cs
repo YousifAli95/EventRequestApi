@@ -14,12 +14,9 @@ namespace EventRequestApi.Models
             this._eventsContext = eventsContext;
         }
 
-        internal void AddEvent(EventDto eventDto)
+        internal void AddEvent(Event @event)
         {       
-            string serializedEvent = JsonSerializer.Serialize(eventDto);
-            Event @event = JsonSerializer.Deserialize<Event>(serializedEvent);
-
-            //Checking if shippping info already exists in the table.
+            //Checking if shippping info already exists in the "BillOrShipInfo" table.
             var existingShippingInfo = GetBillOrShipInfoFromTable(@event.ShipTo);
             if(existingShippingInfo is not null)
             {
@@ -27,7 +24,7 @@ namespace EventRequestApi.Models
                 @event.ShipToId = existingShippingInfo.Id;
             }
 
-            //Checking if billing info already exists in the table.
+            //Checking if billing info already exists in "BillOrShipInfo" the table.
             var existingBillingInfo = GetBillOrShipInfoFromTable(@event.BillTo);
             if (existingBillingInfo is not null)
             {
