@@ -33,7 +33,6 @@ namespace EventRequestApi.Models
             {
                 @event.BillTo = null;
                 @event.BillToId = existingBillingInfo.Id;
-               
             }
             _eventsContext.Events.Add(@event);
             _eventsContext.SaveChanges();
