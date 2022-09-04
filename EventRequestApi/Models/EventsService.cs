@@ -24,7 +24,7 @@ namespace EventRequestApi.Models
                 @event.ShipToId = existingShippingInfo.Id;
             }
 
-            //Checking if billing info already exists in "BillOrShipInfo" the table.
+            //Checking if billing info already exists in "BillOrShipInfo" the table. 
             var existingBillingInfo = GetBillOrShipInfoFromTable(@event.BillTo);
             if (existingBillingInfo is not null)
             {
