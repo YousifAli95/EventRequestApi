@@ -1,6 +1,5 @@
 ﻿using EventRequestApi.Models.Entities;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
 using System.Text.Json;
 
 namespace EventRequestApi.Models
@@ -16,12 +15,28 @@ namespace EventRequestApi.Models
 
         internal void AddEvent(EventDto eventDto)
         {       
-
             string serializedEvent = JsonSerializer.Serialize(eventDto);
             Event @event = JsonSerializer.Deserialize<Event>(serializedEvent);
+
+            //Checking if shippping info already exists in the table.
+            var existingShippingInfo = _eventsContext.BillingAndShippingAddresses.SingleOrDefault(
+                o=> o.Name + o.Address + o.State + o.City + o.Zip == @event.ShipTo.Name + @event.ShipTo.Address + @event.ShipTo.State + @event.ShipTo.City + @event.ShipTo.Zip);
+            if(existingShippingInfo is not null)
+            {
+                @event.ShipTo = null;
+                @event.ShipToId = existingShippingInfo.Id;
+            }
+            //Checking if billing info already exists in the table.
+            var existingBillingInfo = _eventsContext.BillingAndShippingAddresses.SingleOrDefault(
+               o => o.Name + o.Address + o.State + o.City + o.Zip == @event.BillTo.Name + @event.BillTo.Address + @event.BillTo.State + @event.BillTo.City + @event.BillTo.Zip);
+            if (existingBillingInfo is not null)
+            {
+                @event.BillTo = null;
+                @event.BillToId = existingBillingInfo.Id;
+               
+            }
             _eventsContext.Events.Add(@event);
             _eventsContext.SaveChanges();
-
         }
 
         internal async Task<EventDto[]> GetAllEventsAsync()

@@ -27,7 +27,6 @@ namespace EventRequestApi.Controllers
         {
             try
             {
-                
                 eventsService.AddEvent(eventDTO);
                 return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
             }
