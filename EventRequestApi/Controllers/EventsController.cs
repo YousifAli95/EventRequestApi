@@ -15,19 +15,20 @@ namespace EventRequestApi.Controllers
         }
 
         [HttpGet("/all-events")]
-        public async Task<EventDTO[]> GetAllEvents()
+        public async Task<EventDto[]> GetAllEvents()
         {
-            EventDTO[] allEvents = await eventsService.GetAllEventsAsync();
+            EventDto[] allEvents = await eventsService.GetAllEventsAsync();
             return allEvents;
         }
 
 
         [HttpPost("/add-event")]
-        public HttpResponseMessage Post([FromBody] object serializedJsonObject)
+        public HttpResponseMessage Post([FromBody] EventDto eventDTO )
         {
             try
             {
-                eventsService.AddEvent(serializedJsonObject.ToString());
+                
+                eventsService.AddEvent(eventDTO);
                 return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
             }
             catch(Exception e)

@@ -14,37 +14,24 @@ namespace EventRequestApi.Models
             this._eventsContext = eventsContext;
         }
 
-        internal void AddEvent(string serializedJsonObject)
-        {
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            Event events = JsonSerializer.Deserialize<Event>(serializedJsonObject, options);
+        internal void AddEvent(EventDto eventDto)
+        {       
 
-            var jsonObject = JObject.Parse(serializedJsonObject);
-            var serializedShipTo = (jsonObject["shipTo"]).ToString();
-            var serializedBillTo = (jsonObject["billTo"]).ToString();
-
-            BillingAndShippingAddress shippingInformation = JsonSerializer.Deserialize<BillingAndShippingAddress>(serializedShipTo, options);
-            BillingAndShippingAddress billingInformation = JsonSerializer.Deserialize<BillingAndShippingAddress>(serializedBillTo, options);
-
-            _eventsContext.BillingAndShippingAddresses.Add(shippingInformation);
-            _eventsContext.BillingAndShippingAddresses.Add(billingInformation);
-            _eventsContext.SaveChanges();
-
-            events.BillToId = billingInformation.Id;
-            events.ShipToId = shippingInformation.Id;
-            _eventsContext.Events.Add(events);
+            string serializedEvent = JsonSerializer.Serialize(eventDto);
+            Event @event = JsonSerializer.Deserialize<Event>(serializedEvent);
+            _eventsContext.Events.Add(@event);
             _eventsContext.SaveChanges();
 
         }
 
-        internal async Task<EventDTO[]> GetAllEventsAsync()
+        internal async Task<EventDto[]> GetAllEventsAsync()
         {
-            return await _eventsContext.Events.Select(o => new EventDTO
+            return await _eventsContext.Events.Select(o => new EventDto
             {
                 Name = o.Name,
                 Sku = o.Sku,
                 Price = o.Price,
-                BillTo = new BillingAndShippingAddressDTO
+                BillTo = new BillingAndShippingAddressDto
                 {
                     Address = o.BillTo.Address,
                     Name = o.BillTo.Name,
@@ -53,7 +40,7 @@ namespace EventRequestApi.Models
                     City = o.BillTo.City,
 
                 },
-                ShipTo = new BillingAndShippingAddressDTO
+                ShipTo = new BillingAndShippingAddressDto
                 {
                     Address = o.ShipTo.Address,
                     Name = o.ShipTo.Name,
