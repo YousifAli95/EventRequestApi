@@ -1,15 +1,16 @@
-﻿using EventRequestApi.Models;
-using EventRequestApi.Models.Entities;
+﻿using Models;
+using Models.Entities;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
+using Dto;
+using Contracts.Services;
 
 namespace EventRequestApi.Controllers
 {
     public class EventsController : ControllerBase
     {
-        EventsService eventsService;
+        IEventService eventsService;
 
-        public EventsController(EventsService eventsService)
+        public EventsController(IEventService eventsService)
         {
             this.eventsService = eventsService;
         }

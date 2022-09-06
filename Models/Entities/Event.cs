@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EventRequestApi.Models.Entities
+namespace Models.Entities
 {
     public partial class Event
     {

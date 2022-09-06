@@ -1,2 +1,2 @@
-﻿Scaffold-DbContext -Connection name=DefaultConnection -Provider Microsoft.EntityFrameworkCore.SqlServer -Project "EventRequestApi" -OutputDir "Models/Entities" -Context "EventsContext" -NoOnConfiguring -Force
+﻿Scaffold-DbContext -Connection name=DefaultConnection -Provider Microsoft.EntityFrameworkCore.SqlServer -Project "Models" -OutputDir "Entities" -Context "EventsContext" -NoOnConfiguring -Force
 

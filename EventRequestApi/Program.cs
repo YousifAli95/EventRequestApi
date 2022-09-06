@@ -1,14 +1,19 @@
-using EventRequestApi.Models;
-using EventRequestApi.Models.Entities;
+
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+using Models.Entities;
+using Models;
+using Services;
+using Contracts.Services;
+using Contracts.Repositories;
+using Repos;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddTransient<EventsService>(); 
+builder.Services.AddTransient<IEventRepository, EventRepository>(); 
+builder.Services.AddTransient<IEventService, EventService>(); 
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<EventsContext>(o => o.UseSqlServer(connString));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace EventRequestApi.Models.Entities
+namespace Models.Entities
 {
     public partial class EventsContext : DbContext
     {
